@@ -1,0 +1,28 @@
+package com.example.spring.advanced.app.v4;
+
+import com.example.spring.advanced.template.AbstractTemplate;
+import com.example.spring.advanced.trace.TraceStatus;
+import com.example.spring.advanced.trace.logtrace.LogTrace;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+public class OrderControllerV4 {
+
+    private final OrderServiceV4 orderService;
+    private final LogTrace trace;
+
+    @GetMapping("/v4/request")
+    public String request(String itemId) {
+        AbstractTemplate<String> template = new AbstractTemplate<>(trace) {
+            @Override
+            protected String call() {
+                orderService.orderItem(itemId);
+                return "Ok";
+            }
+        };
+        return template.excute("OrderController.request()");
+    }
+}
