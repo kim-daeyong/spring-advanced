@@ -1,23 +1,23 @@
-package com.example.spring.advanced.template;
+package com.example.spring.advanced.trace.callback;
 
 import com.example.spring.advanced.trace.TraceStatus;
 import com.example.spring.advanced.trace.logtrace.LogTrace;
 
-public abstract class AbstractTemplate<T> {
+public class TraceTemplate {
 
     private final LogTrace trace;
 
-    public AbstractTemplate(LogTrace trace) {
+    public TraceTemplate(LogTrace trace) {
         this.trace = trace;
     }
 
-    public T excute(String message) {
+    public <T> T excute(String message, TraceCallback<T> callback) {
         TraceStatus status = null;
 
         try {
             status = trace.begin(message);
             //로직 호출
-            T result = call();
+            T result = callback.call();
 
             trace.end(status);
             return result;
@@ -27,5 +27,4 @@ public abstract class AbstractTemplate<T> {
         }
     }
 
-    protected abstract T call();
 }

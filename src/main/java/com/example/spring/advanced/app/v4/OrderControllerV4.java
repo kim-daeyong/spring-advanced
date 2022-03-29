@@ -1,7 +1,6 @@
 package com.example.spring.advanced.app.v4;
 
-import com.example.spring.advanced.template.AbstractTemplate;
-import com.example.spring.advanced.trace.TraceStatus;
+import com.example.spring.advanced.trace.template.AbstractTemplate;
 import com.example.spring.advanced.trace.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
