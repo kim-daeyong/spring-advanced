@@ -17,6 +17,7 @@ public class JdkDynamicProxyTest {
         AInterface proxy = (AInterface) Proxy.newProxyInstance(AInterface.class.getClassLoader(), new Class[]{AInterface.class}, handler);
 
         proxy.call();
+        proxy.call2();
         log.info("targetClass={}", target.getClass());
         log.info("proxyClass={}", proxy.getClass());
     }
